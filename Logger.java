@@ -6,19 +6,26 @@ import java.io.PrintWriter;
 import java.io.RandomAccessFile;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-
+import java.util.Scanner;
 
 public class Logger {
     public static void main(String[] args) throws InterruptedException, IOException {
+    	 	//---------------------------------------------PATIENT NAME INPUT-------------------------------------------------------------------------
+    		Scanner sc = new Scanner(System.in);  
+    		System.out.println("Enter patient first and last name:");
+    		String name = sc.nextLine();
+    		//once finished
+    		sc.close();
     		 //----------------------------------------------PRODUCT VERIFICATION-------------------------------------------------------------------------
-	    	 File productID = new File("C:\\Users\\Daniel\\Desktop\\SimulANT+ 2.3.0/SimulANT+/SimulANT+ Logs - logs/Heart Rate Display Events.txt");
-		     if (productID.delete()) {
+	    	 File events = new File("C:\\Users\\Daniel\\Desktop\\SimulANT+ 2.3.0/SimulANT+/SimulANT+ Logs - logs/Heart Rate Display Events.txt");
+		     if (events.delete()) {
 		         System.out.println("Deleting old logs...");
 		         System.out.println("Start logging now.");
 		         Thread.sleep(10000);
 		         System.out.println("Turn on the heart rate monitor");
-		         Thread.sleep(10000);
+		         Thread.sleep(15000);
 		         String line5 = Files.readAllLines(Paths.get("C:\\Users\\Daniel\\Desktop\\SimulANT+ 2.3.0/SimulANT+/SimulANT+ Logs - logs/Heart Rate Display Events.txt")).get(4);
+		         //catch error here and restart program
 		         if (line5.contains("53848")) {
 		        	 System.out.println("Product ID Verification Successful");
 	                }
@@ -33,7 +40,8 @@ public class Logger {
 		    	 return;
 		     }
 		    //------------------------------------------------------------------------------------------------------------------------------------------
-		    PrintWriter writer = new PrintWriter("Average Heart Rate", "UTF-8"); // create printable txt file
+		    @SuppressWarnings("resource")
+			PrintWriter writer = new PrintWriter("Patient Data.txt", "UTF-8"); // create printable txt file
             int[] heartArray = new int[10];//declare avg array
             int index = 0;
             while(true) {
@@ -74,7 +82,8 @@ public class Logger {
                 	//break;
                 }
                 else {
-                    String hex = lastLine.substring(45,47);    //get heartrate hex value
+                	String hexString = lastLine.substring(lastLine.length() - 3);
+                    String hex = hexString.replaceAll("]","");    //get heartrate hex value
                     int heartrate = Integer.parseInt(hex,16);  //convert to decimal
                     System.out.println(heartrate); //print heartrate
                     heartArray[index] = heartrate;//add to array
@@ -89,8 +98,8 @@ public class Logger {
                 }
                 int avg = total / heartArray.length;
                 System.out.println("Average: " + avg); //print avg
-                //writer.open();
-                writer.println("Average: " + avg); //print avg to file
+                writer.println(name);
+                writer.println(avg); //print avg to file
                 writer.flush();
                 index = 0; //reset index (no need to wipe array as it will be overwritten)
                 if (avg < 60 || avg > 100)
