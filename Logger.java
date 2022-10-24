@@ -1,6 +1,7 @@
 package heartrate;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.RandomAccessFile;
@@ -16,22 +17,34 @@ public class Logger {
     		String name = sc.nextLine();
     		//once finished
     		sc.close();
+    		
+    		Runtime.getRuntime().exec("C:\\Users\\Daniel\\eclipse-workspace\\heartrate\\SimulANT+ 2.3.0\\SimulANT+\\SimulANT+.exe", null, new File("C:\\Users\\Daniel\\eclipse-workspace\\heartrate\\SimulANT+ 2.3.0\\SimulANT+\\"));
     		 //----------------------------------------------PRODUCT VERIFICATION-------------------------------------------------------------------------
-	    	 File events = new File("C:\\Users\\Daniel\\Desktop\\SimulANT+ 2.3.0/SimulANT+/SimulANT+ Logs - logs/Heart Rate Display Events.txt");
+	    	 File events = new File("C:\\Users\\Daniel\\eclipse-workspace\\heartrate\\SimulANT+ 2.3.0\\SimulANT+\\SimulANT+ Logs - logs\\Heart Rate Display Events.txt");
 		     if (events.delete()) {
 		         System.out.println("Deleting old logs...");
 		         System.out.println("Start logging now.");
 		         Thread.sleep(10000);
 		         System.out.println("Turn on the heart rate monitor");
 		         Thread.sleep(15000);
-		         String line5 = Files.readAllLines(Paths.get("C:\\Users\\Daniel\\Desktop\\SimulANT+ 2.3.0/SimulANT+/SimulANT+ Logs - logs/Heart Rate Display Events.txt")).get(4);
-		         //catch error here and restart program
-		         if (line5.contains("53848")) {
+		         String word = "53848";
+		         boolean flag = false;
+		         int count = 0;
+		         Scanner sc2 = new Scanner(new FileInputStream("C:\\Users\\Daniel\\eclipse-workspace\\heartrate\\SimulANT+ 2.3.0\\SimulANT+\\SimulANT+ Logs - logs\\Heart Rate Display Events.txt"));
+		         while(sc2.hasNextLine()) {
+		            String line = sc2.nextLine();
+		            if(line.indexOf(word)!=-1) {
+		               flag = true;
+		               count = count+1;
+		            }
+		         }
+		         if(flag) {
 		        	 System.out.println("Product ID Verification Successful");
-	                }
-		         else {
-		        	 System.out.println("Product ID Verification Failure");
-		        	 //terminate code
+		            //Correct Product ID
+		            //do nothing
+		         } else {
+		            System.out.println("Product ID Verification Failure");
+		            //terminate program
 		         }
 		     }
 		     else {
@@ -49,7 +62,7 @@ public class Logger {
             //code to run every 1000 ms (1 second)
             RandomAccessFile fileHandler = null;
             try {
-                File file = new File("C:\\Users\\Daniel\\Desktop\\SimulANT+ 2.3.0/SimulANT+/SimulANT+ Logs - logs/Heart Rate Display ANT Messages.txt");
+                File file = new File("C:\\Users\\Daniel\\eclipse-workspace\\heartrate\\SimulANT+ 2.3.0\\SimulANT+\\SimulANT+ Logs - logs\\Heart Rate Display ANT Messages.txt");
                 fileHandler = new RandomAccessFile( file, "r" );
                 long fileLength = fileHandler.length() - 1;
                 StringBuilder sb = new StringBuilder();
@@ -104,6 +117,7 @@ public class Logger {
                 index = 0; //reset index (no need to wipe array as it will be overwritten)
                 if (avg < 60 || avg > 100)
                 	System.out.println("WARNING");
+                break;
                 
             }
 
