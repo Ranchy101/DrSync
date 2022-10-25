@@ -117,6 +117,7 @@ public class Logger {
                 index = 0; //reset index (no need to wipe array as it will be overwritten)
                 if (avg < 60 || avg > 100)
                 	System.out.println("WARNING");
+		Thread.sleep(10000);
                 break;
                 
             }
