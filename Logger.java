@@ -13,12 +13,8 @@ public class Logger {
     public static void main(String[] args) throws InterruptedException, IOException {
     	 	//---------------------------------------------PATIENT NAME INPUT-------------------------------------------------------------------------
     		Scanner sc = new Scanner(System.in);  
-    		System.out.println("Enter patient last name:");
-    		String lastName = sc.nextLine();
-    		System.out.println("Enter patient first name:");
-    		String firstName = sc.nextLine();
-    		System.out.println("Enter patient room number: ");
-    		String room = sc.nextLine();
+    		System.out.println("Enter patient first and last name:");
+    		String name = sc.nextLine();
     		//once finished
     		sc.close();
     		
@@ -115,14 +111,13 @@ public class Logger {
                 }
                 int avg = total / heartArray.length;
                 System.out.println("Average: " + avg); //print avg
-                writer.println(lastName);
-                writer.println(firstName);
-                writer.println(room);
+                writer.println(name);
                 writer.println(avg); //print avg to file
                 writer.flush();
                 index = 0; //reset index (no need to wipe array as it will be overwritten)
                 if (avg < 60 || avg > 100)
                 	System.out.println("WARNING");
+		Thread.sleep(10000);
                 break;
                 
             }
