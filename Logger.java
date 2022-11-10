@@ -3,29 +3,32 @@ package heartrate;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.io.RandomAccessFile;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.sql.*;
 import java.util.Scanner;
 
 public class Logger {
-    public static void main(String[] args) throws InterruptedException, IOException {
+    public static void main(String[] args) throws InterruptedException, IOException, SQLException, ClassNotFoundException {
+    		Class.forName("com.mysql.cj.jdbc.Driver");
+	    	String url = "jdbc:mysql://database-1.cqwrgzkfrky6.us-west-2.rds.amazonaws.com/SyncData";
+			String user = "admin";
+			String password = "get-blame-lateral";
     	 	//---------------------------------------------PATIENT NAME INPUT-------------------------------------------------------------------------
-    		Scanner sc = new Scanner(System.in);  
+    		Scanner sc = new Scanner(System.in);
+    		System.out.println("Enter Patient ID: ");
+    		String patientID = sc.nextLine();
     		System.out.println("Enter patient last name:");
     		String lastName = sc.nextLine();
     		System.out.println("Enter patient first name:");
     		String firstName = sc.nextLine();
-    		System.out.println("Enter patient room number: ");
+    		System.out.println("Enter patient room number:");
     		String room = sc.nextLine();
     		//once finished
     		sc.close();
-    		
     		Runtime.getRuntime().exec("C:\\Users\\Daniel\\eclipse-workspace\\heartrate\\SimulANT+ 2.3.0\\SimulANT+\\SimulANT+.exe", null, new File("C:\\Users\\Daniel\\eclipse-workspace\\heartrate\\SimulANT+ 2.3.0\\SimulANT+\\"));
     		 //----------------------------------------------PRODUCT VERIFICATION-------------------------------------------------------------------------
 	    	 File events = new File("C:\\Users\\Daniel\\eclipse-workspace\\heartrate\\SimulANT+ 2.3.0\\SimulANT+\\SimulANT+ Logs - logs\\Heart Rate Display Events.txt");
-		     if (events.delete()) {
+	    	 if (events.delete()) {
 		         System.out.println("Deleting old logs...");
 		         System.out.println("Start logging now.");
 		         Thread.sleep(10000);
@@ -54,11 +57,11 @@ public class Logger {
 		     else {
 		    	 System.out.println("Failed to delete old logs. Logging must be stopped first on SimulANT+ first.");
 		    	 System.out.println("Terminating Program...");
-		    	 return;
+		    	 //return;
 		     }
 		    //------------------------------------------------------------------------------------------------------------------------------------------
 		    @SuppressWarnings("resource")
-			PrintWriter writer = new PrintWriter("Patient Data.txt", "UTF-8"); // create printable txt file
+			//PrintWriter writer = new PrintWriter("Patient Data.txt", "UTF-8"); // create printable txt file
             int[] heartArray = new int[10];//declare avg array
             int index = 0;
             while(true) {
@@ -115,11 +118,15 @@ public class Logger {
                 }
                 int avg = total / heartArray.length;
                 System.out.println("Average: " + avg); //print avg
-                writer.println(lastName);
-                writer.println(firstName);
-                writer.println(room);
-                writer.println(avg); //print avg to file
-                writer.flush();
+                String query = "insert into PatientData" +
+    					"(lastName, firstName, roomNumber, heartrate, patientID) " +
+    					"values ('"+lastName+"', '"+firstName+"', '"+room+"', "+avg+",'"+patientID+"' )";
+    			Connection connection = DriverManager.getConnection(url, user, password);
+    			Statement statement = connection.createStatement();
+    			statement.executeUpdate(query);
+    			statement.close();
+    			connection.close();
+    			System.out.println("Patient data sent successfully.");
                 index = 0; //reset index (no need to wipe array as it will be overwritten)
                 if (avg < 60 || avg > 100)
                 	System.out.println("WARNING");
