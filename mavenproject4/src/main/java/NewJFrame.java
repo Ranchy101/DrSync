@@ -32,13 +32,13 @@ ActionListener taskPerformer = new ActionListener() {
                 dispose();
             }
         };
-        Timer timer = new Timer(6000 ,taskPerformer);
+        Timer timer = new Timer(600000 ,taskPerformer);
         
     public NewJFrame() throws IOException {
         initComponents();
         
         Boolean Beat=false;
-        //Runtime.getRuntime().exec(currDir+"\\SimulANT+ 2.3.0\\SimulANT+\\SimulANT+.exe", null, new File(currDir+"\\SimulANT+ 2.3.0\\SimulANT+\\"));
+        Runtime.getRuntime().exec(currDir+"\\SimulANT+ 2.3.0\\SimulANT+\\SimulANT+.exe", null, new File(currDir+"\\SimulANT+ 2.3.0\\SimulANT+\\"));
          
         timer.start();
         
