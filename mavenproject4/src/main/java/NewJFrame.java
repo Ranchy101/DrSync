@@ -25,23 +25,22 @@ public class NewJFrame extends javax.swing.JFrame {
      * Creates new form NewJFrame
      */
     String currDir = System.getProperty("user.dir");
-    
-
-    public NewJFrame() throws IOException {
-        initComponents();
-        Boolean Beat=false;
-        //Runtime.getRuntime().exec(currDir+"\\SimulANT+ 2.3.0\\SimulANT+\\SimulANT+.exe", null, new File(currDir+"\\SimulANT+ 2.3.0\\SimulANT+\\"));
-         ActionListener taskPerformer = new ActionListener() {
+ActionListener taskPerformer = new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 //...Perform a task...
 
-                DisplayResults.setText("AAAAAaaaaaaa");
+                dispose();
             }
         };
-        Timer timer = new Timer(60000 ,taskPerformer);
-        timer.setRepeats(false);
-        timer.start();
+        Timer timer = new Timer(6000 ,taskPerformer);
         
+    public NewJFrame() throws IOException {
+        initComponents();
+        
+        Boolean Beat=false;
+        //Runtime.getRuntime().exec(currDir+"\\SimulANT+ 2.3.0\\SimulANT+\\SimulANT+.exe", null, new File(currDir+"\\SimulANT+ 2.3.0\\SimulANT+\\"));
+         
+        timer.start();
         
     }
 
@@ -55,7 +54,7 @@ public class NewJFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        DisplayResults = new javax.swing.JTextField();
+        DisplayResults = new javax.swing.JTextArea();
         Header = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         Heartrate = new javax.swing.JButton();
@@ -67,12 +66,9 @@ public class NewJFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        DisplayResults.setText("Results appear here when an average is taken");
-        DisplayResults.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DisplayResultsActionPerformed(evt);
-            }
-        });
+        DisplayResults.setColumns(20);
+        DisplayResults.setRows(5);
+        DisplayResults.setText("\t1. Choose a sensor\n\t2. Start logging\n\t3. Turn on sensor\n\n         RESULTS WILL APPEAR HERE");
         jScrollPane1.setViewportView(DisplayResults);
 
         Header.setText("Dr Sync data app");
@@ -87,6 +83,11 @@ public class NewJFrame extends javax.swing.JFrame {
         });
 
         jButton2.setText("jButton1");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         ID.setText("Patient ID");
 
@@ -168,6 +169,7 @@ public class NewJFrame extends javax.swing.JFrame {
     private void HeartrateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HeartrateActionPerformed
 
         try {
+            timer.restart();
             Header.setText("hi");
             //---------------------------------------------JDBC MySQL Setup-------------------------------------------------------------------------
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -316,10 +318,6 @@ public class NewJFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_HeartrateActionPerformed
 
-    private void DisplayResultsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DisplayResultsActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_DisplayResultsActionPerformed
-
     private void FirstNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FirstNameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_FirstNameActionPerformed
@@ -327,6 +325,10 @@ public class NewJFrame extends javax.swing.JFrame {
     private void RoomNumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RoomNumActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_RoomNumActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        timer.restart();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -354,6 +356,9 @@ public class NewJFrame extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -368,7 +373,7 @@ public class NewJFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField DisplayResults;
+    private javax.swing.JTextArea DisplayResults;
     private javax.swing.JTextField FirstName;
     private javax.swing.JLabel Header;
     private javax.swing.JButton Heartrate;
