@@ -60,9 +60,6 @@ ActionListener taskPerformer = new ActionListener() {
         Heartrate = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         ID = new javax.swing.JTextField();
-        FirstName = new javax.swing.JTextField();
-        Surname = new javax.swing.JTextField();
-        RoomNum = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -71,7 +68,7 @@ ActionListener taskPerformer = new ActionListener() {
         DisplayResults.setText("\t1. Choose a sensor\n\t2. Start logging\n\t3. Turn on sensor\n\n         RESULTS WILL APPEAR HERE");
         jScrollPane1.setViewportView(DisplayResults);
 
-        Header.setText("Dr Sync data app");
+        Header.setText("Dr Sync");
 
         jButton1.setText("jButton1");
 
@@ -89,21 +86,10 @@ ActionListener taskPerformer = new ActionListener() {
             }
         });
 
-        ID.setText("Patient ID");
-
-        FirstName.setText("Patient Firstname");
-        FirstName.addActionListener(new java.awt.event.ActionListener() {
+        ID.setText("Medical Record Number");
+        ID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                FirstNameActionPerformed(evt);
-            }
-        });
-
-        Surname.setText("Patient Surname");
-
-        RoomNum.setText("Room Number");
-        RoomNum.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RoomNumActionPerformed(evt);
+                IDActionPerformed(evt);
             }
         });
 
@@ -114,53 +100,38 @@ ActionListener taskPerformer = new ActionListener() {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(Header, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(15, 15, 15)
+                        .addComponent(Heartrate)
+                        .addGap(26, 26, 26)
+                        .addComponent(jButton2)
+                        .addGap(31, 31, 31)
+                        .addComponent(jButton1))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(RoomNum)
-                            .addComponent(Surname)
-                            .addComponent(FirstName, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
-                    .addComponent(Heartrate)
-                    .addComponent(jButton2))
-                .addGap(14, 14, 14))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ID, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(Header, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(89, 89, 89)
+                        .addComponent(ID, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(7, 7, 7)
-                        .addComponent(Header)
-                        .addGap(16, 16, 16)
-                        .addComponent(ID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(FirstName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Surname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(RoomNum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(65, 65, 65)
-                        .addComponent(Heartrate)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton2)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addGap(7, 7, 7)
+                .addComponent(Header)
+                .addGap(26, 26, 26)
+                .addComponent(ID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Heartrate)
+                    .addComponent(jButton2)
+                    .addComponent(jButton1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(58, 58, 58))
+                .addGap(62, 62, 62))
         );
 
         pack();
@@ -181,11 +152,9 @@ ActionListener taskPerformer = new ActionListener() {
             System.out.println("Enter Patient ID: ");
             String patientID = ID.getText();
             System.out.println("Enter patient last name:");
-            String lastName = Surname.getText();
             System.out.println("Enter patient first name:");
-            String firstName = FirstName.getText();
             System.out.println("Enter patient room number:");
-            String room = RoomNum.getText();
+            //String room = RoomNum.getText();
             //once finished
             //kept for legacy reasons, should not be needed but if it doesn't work, comment out text wrapped with //### and ###//, uncomment these
            // String currDir = System.getProperty("user.dir");
@@ -276,6 +245,9 @@ ActionListener taskPerformer = new ActionListener() {
                                     }
                                     int avg = total / heartArray.length;
                                     DisplayResults.setText("Average: " + avg); //print avg
+                                    String lastName = "Ranchpar";
+                                    String firstName = "Daniel";
+                                    String room = "JD2213";
                                     String query = "insert into PatientData" +
                                             "(lastName, firstName, roomNumber, heartrate, patientID) " +
                                             "values ('"+lastName+"', '"+firstName+"', '"+room+"', "+avg+",'"+patientID+"' )";
@@ -318,17 +290,13 @@ ActionListener taskPerformer = new ActionListener() {
         }
     }//GEN-LAST:event_HeartrateActionPerformed
 
-    private void FirstNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FirstNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_FirstNameActionPerformed
-
-    private void RoomNumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RoomNumActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_RoomNumActionPerformed
-
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         timer.restart();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void IDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_IDActionPerformed
 
     /**
      * @param args the command line arguments
@@ -374,12 +342,9 @@ ActionListener taskPerformer = new ActionListener() {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea DisplayResults;
-    private javax.swing.JTextField FirstName;
     private javax.swing.JLabel Header;
     private javax.swing.JButton Heartrate;
     private javax.swing.JTextField ID;
-    private javax.swing.JTextField RoomNum;
-    private javax.swing.JTextField Surname;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JScrollPane jScrollPane1;
