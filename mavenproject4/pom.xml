@@ -18,4 +18,5 @@
         <maven.compiler.target>17</maven.compiler.target>
         <exec.mainClass>com.mycompany.mavenproject4.Mavenproject4</exec.mainClass>
     </properties>
+    <name>mavenproject4copy</name>
 </project>
