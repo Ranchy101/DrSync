@@ -1,38 +1,47 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.io.RandomAccessFile;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.Scanner;
- */
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.RandomAccessFile;
-import java.io.UnsupportedEncodingException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.sql.*;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.Timer;
+
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ */
+
 /**
  *
- * @author Groe
+ * @author gsr75090
  */
 public class NewJFrame extends javax.swing.JFrame {
-
+//december 4
     /**
      * Creates new form NewJFrame
      */
-    public NewJFrame() {
+    String currDir = System.getProperty("user.dir");
+ActionListener taskPerformer = new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                //...Perform a task...
+
+                dispose();
+            }
+        };
+        Timer timer = new Timer(600000 ,taskPerformer);
+        
+    public NewJFrame() throws IOException {
         initComponents();
+        
+        Boolean Beat=false;
+        Runtime.getRuntime().exec(currDir+"\\SimulANT+ 2.3.0\\SimulANT+\\SimulANT+.exe", null, new File(currDir+"\\SimulANT+ 2.3.0\\SimulANT+\\"));
+         
+        timer.start();
+        
     }
 
     /**
@@ -44,14 +53,43 @@ public class NewJFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        DisplayResults = new javax.swing.JTextArea();
+        Header = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        Heartrate = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        ID = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        DisplayResults.setColumns(20);
+        DisplayResults.setRows(5);
+        DisplayResults.setText("\t1. Choose a sensor\n\t2. Start logging\n\t3. Turn on sensor\n\n         RESULTS WILL APPEAR HERE");
+        jScrollPane1.setViewportView(DisplayResults);
+
+        Header.setText("Dr Sync");
+
         jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+
+        Heartrate.setText("Heart Rate");
+        Heartrate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                HeartrateActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("jButton1");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        ID.setText("Medical Record Number");
+        ID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                IDActionPerformed(evt);
             }
         });
 
@@ -60,186 +98,205 @@ public class NewJFrame extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(105, 105, 105)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(127, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addComponent(Heartrate)
+                        .addGap(26, 26, 26)
+                        .addComponent(jButton2)
+                        .addGap(31, 31, 31)
+                        .addComponent(jButton1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(Header, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(89, 89, 89)
+                        .addComponent(ID, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(177, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(98, 98, 98))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(7, 7, 7)
+                .addComponent(Header)
+                .addGap(26, 26, 26)
+                .addComponent(ID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Heartrate)
+                    .addComponent(jButton2)
+                    .addComponent(jButton1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(62, 62, 62))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-         PrintWriter writer = null;
+    private void HeartrateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HeartrateActionPerformed
+
         try {
-            // TODO add your handling code here:
+            timer.restart();
+            Header.setText("hi");
+            //---------------------------------------------JDBC MySQL Setup-------------------------------------------------------------------------
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            String url = "jdbc:mysql://database-1.cqwrgzkfrky6.us-west-2.rds.amazonaws.com/SyncData";
+            String user = "admin";
+            String password = "get-blame-lateral";
             //---------------------------------------------PATIENT NAME INPUT-------------------------------------------------------------------------
-    		Scanner sc = new Scanner(System.in);  
-    		System.out.println("Enter patient last name:");
-    		String lastName = sc.nextLine();
-    		System.out.println("Enter patient first name:");
-    		String firstName = sc.nextLine();
-    		System.out.println("Enter patient room number: ");
-    		String room = sc.nextLine();
-    		//once finished
-    		sc.close();
-            
-            
-            ////////////////////////////genericize these!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Not everyone has access to daniel's directory's
-            
-            try {
-               Runtime.getRuntime().exec("C:\\Users\\Daniel\\eclipse-workspace\\heartrate\\SimulANT+ 2.3.0\\SimulANT+\\SimulANT+.exe", null, new File("C:\\Users\\Daniel\\eclipse-workspace\\heartrate\\SimulANT+ 2.3.0\\SimulANT+\\"));
-            } catch (IOException ex) {
-                Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            ////////////////////////////////////////
+            Scanner sc = new Scanner(System.in);
+            System.out.println("Enter Patient ID: ");
+            String patientID = ID.getText();
+            System.out.println("Enter patient last name:");
+            System.out.println("Enter patient first name:");
+            System.out.println("Enter patient room number:");
+            //String room = RoomNum.getText();
+            //once finished
+            //kept for legacy reasons, should not be needed but if it doesn't work, comment out text wrapped with //### and ###//, uncomment these
+           // String currDir = System.getProperty("user.dir");
+           // Runtime.getRuntime().exec(currDir+"\\SimulANT+ 2.3.0\\SimulANT+\\SimulANT+.exe", null, new File(currDir+"\\SimulANT+ 2.3.0\\SimulANT+\\"));
             //----------------------------------------------PRODUCT VERIFICATION-------------------------------------------------------------------------
-            File events = new File("C:\\Users\\Daniel\\eclipse-workspace\\heartrate\\SimulANT+ 2.3.0\\SimulANT+\\SimulANT+ Logs - logs\\Heart Rate Display Events.txt");
-            
-            if (events.delete()) {
-                try {
-                    System.out.println("Deleting old logs...");
-                    System.out.println("Start logging now.");
-                    Thread.sleep(10000);
-                    System.out.println("Turn on the heart rate monitor");
-                    Thread.sleep(15000);
-                    String word = "53848";
-                    boolean flag = false;
-                    int count = 0;
-                    Scanner sc2 = new Scanner(new FileInputStream("Heart Rate Display Events.txt"));
-                    while(sc2.hasNextLine()) {
-                        String line = sc2.nextLine();
-                        if(line.indexOf(word)!=-1) {
-                            flag = true;
-                            count = count+1;
-                        }
-                    }
-                    if(flag) {
-                        System.out.println("Product ID Verification Successful");
-                        //Correct Product ID
-                        //do nothing
-                    } else {
-                        System.out.println("Product ID Verification Failure");
-                        //terminate program
-                    }
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (FileNotFoundException ex) {
-                    Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-            else {
-                System.out.println("Failed to delete old logs. Logging must be stopped first on SimulANT+ first.");
-                System.out.println("Terminating Program...");
-                return;
-            }
-            //------------------------------------------------------------------------------------------------------------------------------------------
-            writer = new PrintWriter("Patient Data.txt", "UTF-8"); // create printable txt file
-            int[] heartArray = new int[10];//declare avg array
-            int index = 0;
-            while(true) {
-                long millis = System.currentTimeMillis();
-                //code to run every 1000 ms (1 second)
-                RandomAccessFile fileHandler = null;
-                try {
-                    //File file = new File("Heart Rate Display ANT Messages.txt");
-                    fileHandler = new RandomAccessFile( "Heart_Rate_Display_ANT_Messages.txt", "r" );
-                    long fileLength = fileHandler.length() - 1;
-                    StringBuilder sb = new StringBuilder();
-                    
-                    for(long filePointer = fileLength; filePointer != -1; filePointer--){
-                        fileHandler.seek( filePointer );
-                        int readByte = fileHandler.readByte();
-                        
-                        if( readByte == 0xA ) {
-                            if( filePointer == fileLength ) {
-                                continue;
-                            }
-                            break;
-                            
-                        } else if( readByte == 0xD ) {
-                            if( filePointer == fileLength - 1 ) {
-                                continue;
-                            }
-                            break;
-                        }
-                        
-                        sb.append( ( char ) readByte );
-                    }
-                    
-                    String lastLine = sb.reverse().toString(); //get last line
-                    if (lastLine.contains("fail") || lastLine.contains("search")) {
-                        //do nothing
-                    }
-                    else if (lastLine.contains("closed")) {
-                        System.out.println("Device shut off");
-                        //break;
-                    }
-                    else {
-                        String hexString = lastLine.substring(lastLine.length() - 3);
-                        String hex = hexString.replaceAll("]","");    //get heartrate hex value
-                        int heartrate = Integer.parseInt(hex,16);  //convert to decimal
-                        System.out.println(heartrate); //print heartrate
-                        heartArray[index] = heartrate;//add to array
-                        index++; //only goes up if not fail
-                    }
-                    //if array full, print avg
-                    if (index == 10) {
-                        //get average of array
-                        int total = 0;
-                        for(int i=0; i<heartArray.length; i++){
-                            total = total + heartArray[i];
-                        }
-                        int avg = total / heartArray.length;
-                        System.out.println("Average: " + avg); //print avg
-                        writer.println(name);
-                        writer.println(avg); //print avg to file
-                        writer.flush();
-                        index = 0; //reset index (no need to wipe array as it will be overwritten)
-                        if (avg < 60 || avg > 100)
-                            System.out.println("WARNING");
-                        try {
+                        File events = new File(currDir+"\\SimulANT+ 2.3.0\\SimulANT+\\SimulANT+ Logs - logs\\Heart Rate Display Events.txt");
+                        if (events.delete()) {
+                            System.out.println("Deleting old logs...");
+                            System.out.println("Start logging now.");
                             Thread.sleep(10000);
-                        } catch (InterruptedException ex) {
-                            Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
+                            System.out.println("Turn on the heart rate monitor");
+                            Thread.sleep(15000);
+                            String word = "53848";
+                            boolean flag = false;
+                            int count = 0;
+                            Scanner sc2 = new Scanner(new FileInputStream(currDir+"\\SimulANT+ 2.3.0\\SimulANT+\\SimulANT+ Logs - logs\\Heart Rate Display Events.txt"));
+                            while(sc2.hasNextLine()) {
+                                String line = sc2.nextLine();
+                                if(line.indexOf(word)!=-1) {
+                                    flag = true;
+                                    count = count+1;
+                                }
+                            }
+                            if(flag) {
+                                System.out.println("Product ID Verification Successful");
+                                //Correct Product ID
+                                //do nothing
+                            } else {
+                                System.out.println("Product ID Verification Failure");
+                                //terminate program
+                            }
                         }
-                        break;
-                        
-                    }
-                    
-                } catch( java.io.FileNotFoundException e ) {
-                    e.printStackTrace();
-                    //return null;
-                } catch( java.io.IOException e ) {
-                    e.printStackTrace();
-                    //return null;
-                } finally {
-                    if (fileHandler != null )
-                        try {
-                            fileHandler.close();
-                        } catch (IOException e) {
-                            /* ignore */
-                        }
-                }
-                Thread.sleep(1000 - millis % 1000);
-            }//timer
-        } //main
- catch (FileNotFoundException ex) {
+                        else {
+                            System.out.println("Failed to delete old logs. Logging must be stopped first on SimulANT+ first.");
+                            System.out.println("Terminating Program...");
+                            //return;
+                        }   //------------------------------------------------------------------------------------------------------------------------------------------
+                        @SuppressWarnings("resource")
+                                int[] heartArray = new int[10];//declare avg array
+                        int index = 0;
+                        while(true) {
+                            long millis = System.currentTimeMillis();
+                            //code to run every 1000 ms (1 second)
+                            RandomAccessFile fileHandler = null;
+                            try {
+                                File file = new File(currDir+"\\SimulANT+ 2.3.0\\SimulANT+\\SimulANT+ Logs - logs\\Heart Rate Display ANT Messages.txt");
+                                fileHandler = new RandomAccessFile( file, "r" );
+                                long fileLength = fileHandler.length() - 1;
+                                StringBuilder sb = new StringBuilder();
+                                for(long filePointer = fileLength; filePointer != -1; filePointer--){
+                                    fileHandler.seek( filePointer );
+                                    int readByte = fileHandler.readByte();
+                                    
+                                    if( readByte == 0xA ) {
+                                        if( filePointer == fileLength ) {
+                                            continue;
+                                        }
+                                        break;
+                                    } else if( readByte == 0xD ) {
+                                        if( filePointer == fileLength - 1 ) {
+                                            continue;
+                                        }
+                                        break;
+                                    }
+                                    sb.append( ( char ) readByte );
+                                }
+                                String lastLine = sb.reverse().toString(); //get last line
+                                if (lastLine.contains("fail") || lastLine.contains("search")) {
+                                    //do nothing
+                                }
+                                else if (lastLine.contains("closed")) {
+                                    System.out.println("Device shut off");
+                                }
+                                else {
+                                    String hexString = lastLine.substring(lastLine.length() - 3);
+                                    String hex = hexString.replaceAll("]","");    //get heartrate hex value
+                                    int heartrate = Integer.parseInt(hex,16);  //convert to decimal
+                                    System.out.println(heartrate); //print heartrate for testing
+                                    heartArray[index] = heartrate;//add to array
+                                    index++; //only goes up if not fail
+                                }
+                                //if array full, print avg
+                                if (index == 10) {
+                                    //get average of array
+                                    int total = 0;
+                                    for(int i=0; i<heartArray.length; i++){
+                                        total = total + heartArray[i];
+                                    }
+                                    int avg = total / heartArray.length;
+                                    DisplayResults.setText("Average: " + avg); //print avg
+                                    String lastName = "Ranchpar";
+                                    String firstName = "Daniel";
+                                    String room = "JD2213";
+                                    String query = "insert into PatientData" +
+                                            "(lastName, firstName, roomNumber, heartrate, patientID) " +
+                                            "values ('"+lastName+"', '"+firstName+"', '"+room+"', "+avg+",'"+patientID+"' )";
+                                    Connection connection = DriverManager.getConnection(url, user, password);
+                                    Statement statement = connection.createStatement();
+                                    statement.executeUpdate(query);
+                                    statement.close();
+                                    connection.close();
+                                    index = 0; //reset index (no need to wipe array as it will be overwritten)
+                                    if (avg < 60 || avg > 100)
+                                        DisplayResults.setText("WARNING");
+                                    break;
+                                    
+                                }
+                                
+                            } catch( java.io.FileNotFoundException e ) {
+                               // e.printStackTrace();
+                                //return null;
+                            } catch( java.io.IOException e ) {
+                                //e.printStackTrace();
+                                //return null;
+                            } catch (SQLException ex) {
+                                Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
+                            } finally {
+                                if (fileHandler != null )
+                                    try {
+                                        fileHandler.close();
+                                    } catch (IOException e) {
+                                        /* ignore */
+                                    }
+                            }
+                            Thread.sleep(1000 - millis % 1000);
+                        }//timer
+            } catch (InterruptedException ex) {
             Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (UnsupportedEncodingException ex) {
+        } catch (IOException ex) {
             Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InterruptedException ex) {
+        } catch (ClassNotFoundException ex) {
             Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            writer.close();
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_HeartrateActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        timer.restart();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void IDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_IDActionPerformed
 
     /**
      * @param args the command line arguments
@@ -267,16 +324,29 @@ public class NewJFrame extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new NewJFrame().setVisible(true);
+                try {
+                    new NewJFrame().setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextArea DisplayResults;
+    private javax.swing.JLabel Header;
+    private javax.swing.JButton Heartrate;
+    private javax.swing.JTextField ID;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }
