@@ -154,18 +154,21 @@ ActionListener taskPerformer = new ActionListener() {
             //System.out.println("Enter patient last name:");
             //System.out.println("Enter patient first name:");
             //System.out.println("Enter patient room number:");
-                       int[] heartArray = new int[10];//declare avg array
-                        int index = 0;
-                        Scanner fileScanner = new Scanner(new File(currDir+"\\ANT-SDK_PC.3.5\\Debug\\ANTHeartrate.txt"));
-                        while (fileScanner.hasNextInt()){
-                            heartArray[index++] = fileScanner.nextInt();
-                        }
-                        //System.out.print(Arrays.toString(heartArray));
-                         int total = 0;
-                         for(int i=0; i<heartArray.length; i++){
-                             total = total + heartArray[i];
-                         }
-                         int avg = total / heartArray.length;
+                        int avg;
+                        do {
+                            int[] heartArray = new int[10];//declare avg array
+                            int index = 0;
+                            Scanner fileScanner = new Scanner(new File(currDir+"\\ANT-SDK_PC.3.5\\Debug\\ANTHeartrate.txt"));
+                            while (fileScanner.hasNextInt()){
+                                heartArray[index++] = fileScanner.nextInt();
+                            }
+                            //System.out.print(Arrays.toString(heartArray));
+                            int total = 0;
+                            for(int i=0; i<heartArray.length; i++){
+                                total = total + heartArray[i];
+                            }
+                            avg = total / heartArray.length;
+                        } while (avg == 0);
                          DisplayResults.setText("Average: " + avg); //print avg
                          String lastName = "Ranchpar";
                          String firstName = "Daniel";
