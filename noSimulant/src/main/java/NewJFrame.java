@@ -29,25 +29,23 @@ public class NewJFrame extends javax.swing.JFrame {
     String currDir = System.getProperty("user.dir");
 ActionListener taskPerformer = new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                //...Perform a task...
+                //log out
                 dispose();
                 new login(IDLogin).setVisible(true);
                 timer.stop();
 
             }
         };
+//create and begin logout timer
         Timer timer = new Timer(600000 ,taskPerformer);
 
     public NewJFrame(String IDInput) throws IOException {
         initComponents();
         
         Boolean Beat=false;
-        //Runtime.getRuntime().exec(currDir+"\\SimulANT+ 2.3.0\\SimulANT+\\SimulANT+.exe", null, new File(currDir+"\\SimulANT+ 2.3.0\\SimulANT+\\"));
         Runtime.getRuntime().exec(currDir+"\\ANT-SDK_PC.3.5\\Debug\\DEMO_HR_RECEIVER.exe", null, new File(currDir+"\\ANT-SDK_PC.3.5\\Debug\\")); 
-        //Process p = Runtime.getRuntime().exec("C:\\Users\\Daniel\\Desktop\\noSimulant\\noSimulant\\ANT-SDK_PC.3.5\\Debug\\DEMO_HR_RECEIVER.exe", null, new File("C:\\Users\\Daniel\\Desktop\\noSimulant\\noSimulant\\ANT-SDK_PC.3.5\\Debug\\")); 
         timer.start();
         IDLogin=IDInput;
-       // Runtime.getRuntime().exec(currDir+"\\SimulANT+ 2.3.0\\SimulANT+\\SimulANT+.exe", null, new File(currDir+"\\SimulANT+ 2.3.0\\SimulANT+\\"));
 
         timer.start();
 
@@ -116,14 +114,15 @@ ActionListener taskPerformer = new ActionListener() {
                         .addGap(31, 31, 31)
                         .addComponent(jButton1))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(Header, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(25, 25, 25)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(89, 89, 89)
-                        .addComponent(ID, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(Header, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addGap(89, 89, 89)
+                            .addComponent(ID, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(32, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -147,21 +146,17 @@ ActionListener taskPerformer = new ActionListener() {
     }// </editor-fold>//GEN-END:initComponents
 
     private void HeartrateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HeartrateActionPerformed
-
-        try {
+        //restart timer
+         try {
             timer.restart();
-            Header.setText("hi");
             //---------------------------------------------JDBC MySQL Setup-------------------------------------------------------------------------
             Class.forName("com.mysql.cj.jdbc.Driver");
             String url = "jdbc:mysql://database-1.cqwrgzkfrky6.us-west-2.rds.amazonaws.com/SyncData";
             String user = "admin";
             String password = "get-blame-lateral";
-            //---------------------------------------------PATIENT NAME INPUT-------------------------------------------------------------------------
+            //---------------------------------------------PATIENT ID INPUT-------------------------------------------------------------------------
             Scanner sc = new Scanner(System.in);
-            //System.out.println("Enter Patient ID: ");
             String patientID = ID.getText();
-            //System.out.println("Enter patient last name:");
-            //System.out.println("Enter patient first name:");
                         int avg;
                         do {
                             int[] heartArray = new int[10];//declare avg array
@@ -170,13 +165,14 @@ ActionListener taskPerformer = new ActionListener() {
                             while (fileScanner.hasNextInt()){
                                 heartArray[index++] = fileScanner.nextInt();
                             }
-                            //System.out.print(Arrays.toString(heartArray));
                             int total = 0;
                             for(int i=0; i<heartArray.length; i++){
                                 total = total + heartArray[i];
                             }
+                            //calculate average heartrate of array
                             avg = total / heartArray.length;
                         } while (avg == 0);
+                        
                         DisplayResults.setText("Average: " + avg); //print avg
                         Connection connection = DriverManager.getConnection(url, user, password);
                         String query = "insert into PatientVisits (patientID, heartrate) values (?,?)";
@@ -184,11 +180,6 @@ ActionListener taskPerformer = new ActionListener() {
                         createquery.setString(1, ID.getText());
                         createquery.setString(2, Integer.toString(avg));
                         createquery.executeUpdate();
-      
-                         Statement statement = connection.createStatement();
-                         statement.executeUpdate(query);
-                         statement.close();
-                         connection.close();
         }catch (ClassNotFoundException ex) {
             Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
         }catch (SQLException ex) {
@@ -196,8 +187,6 @@ ActionListener taskPerformer = new ActionListener() {
              Header.setText("Patient does not exist");
         }
         catch( java.io.FileNotFoundException e ) {
-                               // e.printStackTrace();
-                                //return null;
         }
     }//GEN-LAST:event_HeartrateActionPerformed
 
