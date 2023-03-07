@@ -72,7 +72,7 @@ ActionListener taskPerformer = new ActionListener() {
 
         DisplayResults.setColumns(20);
         DisplayResults.setRows(5);
-        DisplayResults.setText("\t1. Choose a sensor\n\t2. Start logging\n\t3. Turn on sensor\n\n         RESULTS WILL APPEAR HERE");
+        DisplayResults.setText("\t1. Input patient ID\n\t2. Start logging\n\n         RESULTS WILL APPEAR HERE");
         jScrollPane1.setViewportView(DisplayResults);
 
         Header.setText("Dr Sync");
