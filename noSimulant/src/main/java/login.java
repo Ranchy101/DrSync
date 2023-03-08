@@ -67,29 +67,44 @@ public class login extends javax.swing.JFrame {
 
         ID = new javax.swing.JTextField();
         password = new javax.swing.JTextField();
-        Heartrate = new javax.swing.JButton();
+        logIn = new javax.swing.JButton();
         Notify = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         ID.setText("Practitioner Employee ID");
+        ID.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                IDMouseClicked(evt);
+            }
+        });
         ID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 IDActionPerformed(evt);
             }
         });
+        ID.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                IDKeyPressed(evt);
+            }
+        });
 
-        password.setText("practitioner password");
+        password.setText("Practitioner Password");
+        password.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                passwordMouseClicked(evt);
+            }
+        });
         password.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 passwordActionPerformed(evt);
             }
         });
 
-        Heartrate.setText("Log in");
-        Heartrate.addActionListener(new java.awt.event.ActionListener() {
+        logIn.setText("Log in");
+        logIn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                HeartrateActionPerformed(evt);
+                logInActionPerformed(evt);
             }
         });
 
@@ -105,7 +120,7 @@ public class login extends javax.swing.JFrame {
                     .addComponent(Notify, javax.swing.GroupLayout.DEFAULT_SIZE, 368, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Heartrate)
+                            .addComponent(logIn)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(ID, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
                                 .addComponent(password)))
@@ -120,7 +135,7 @@ public class login extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33)
-                .addComponent(Heartrate)
+                .addComponent(logIn)
                 .addGap(18, 18, 18)
                 .addComponent(Notify, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(119, Short.MAX_VALUE))
@@ -137,7 +152,7 @@ public class login extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_IDActionPerformed
 
-    private void HeartrateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HeartrateActionPerformed
+    private void logInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logInActionPerformed
         String Username=ID.getText();
         String Password=password.getText();
         String generatedPassword = null;
@@ -212,7 +227,28 @@ public class login extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_HeartrateActionPerformed
+    }//GEN-LAST:event_logInActionPerformed
+
+    private void IDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_IDMouseClicked
+        if(ID.getText().equals("Practitioner Employee ID"))
+        {
+            ID.setText("");
+        }
+    }//GEN-LAST:event_IDMouseClicked
+
+    private void IDKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_IDKeyPressed
+        if(ID.getText().equals("Practitioner Employee ID"))
+        {
+            ID.setText("");
+        }
+    }//GEN-LAST:event_IDKeyPressed
+
+    private void passwordMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_passwordMouseClicked
+        if(password.getText().equals("Practitioner Password"))
+        {
+            password.setText("");
+        }
+    }//GEN-LAST:event_passwordMouseClicked
 
     /**
      * @param args the command line arguments
@@ -250,9 +286,9 @@ public class login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Heartrate;
     private javax.swing.JTextField ID;
     private javax.swing.JLabel Notify;
+    private javax.swing.JButton logIn;
     private javax.swing.JTextField password;
     // End of variables declaration//GEN-END:variables
 }

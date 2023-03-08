@@ -29,7 +29,7 @@
                   <Component id="Notify" pref="368" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="Heartrate" min="-2" max="-2" attributes="0"/>
+                          <Component id="logIn" min="-2" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="ID" pref="149" max="32767" attributes="0"/>
                               <Component id="password" max="32767" attributes="0"/>
@@ -50,7 +50,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="password" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
-              <Component id="Heartrate" min="-2" max="-2" attributes="0"/>
+              <Component id="logIn" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="Notify" min="-2" pref="15" max="-2" attributes="0"/>
               <EmptySpace pref="119" max="32767" attributes="0"/>
@@ -64,23 +64,26 @@
         <Property name="text" type="java.lang.String" value="Practitioner Employee ID"/>
       </Properties>
       <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="IDMouseClicked"/>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="IDActionPerformed"/>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="IDKeyPressed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="password">
       <Properties>
-        <Property name="text" type="java.lang.String" value="practitioner password"/>
+        <Property name="text" type="java.lang.String" value="Practitioner Password"/>
       </Properties>
       <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="passwordMouseClicked"/>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="passwordActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="Heartrate">
+    <Component class="javax.swing.JButton" name="logIn">
       <Properties>
         <Property name="text" type="java.lang.String" value="Log in"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="HeartrateActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="logInActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="Notify">

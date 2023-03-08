@@ -29,25 +29,23 @@ public class NewJFrame extends javax.swing.JFrame {
     String currDir = System.getProperty("user.dir");
 ActionListener taskPerformer = new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                //...Perform a task...
+                //log out
                 dispose();
                 new login(IDLogin).setVisible(true);
                 timer.stop();
 
             }
         };
+//create and begin logout timer
         Timer timer = new Timer(600000 ,taskPerformer);
 
     public NewJFrame(String IDInput) throws IOException {
         initComponents();
         
         Boolean Beat=false;
-        //Runtime.getRuntime().exec(currDir+"\\SimulANT+ 2.3.0\\SimulANT+\\SimulANT+.exe", null, new File(currDir+"\\SimulANT+ 2.3.0\\SimulANT+\\"));
         Runtime.getRuntime().exec(currDir+"\\ANT-SDK_PC.3.5\\Debug\\DEMO_HR_RECEIVER.exe", null, new File(currDir+"\\ANT-SDK_PC.3.5\\Debug\\")); 
-        //Process p = Runtime.getRuntime().exec("C:\\Users\\Daniel\\Desktop\\noSimulant\\noSimulant\\ANT-SDK_PC.3.5\\Debug\\DEMO_HR_RECEIVER.exe", null, new File("C:\\Users\\Daniel\\Desktop\\noSimulant\\noSimulant\\ANT-SDK_PC.3.5\\Debug\\")); 
         timer.start();
         IDLogin=IDInput;
-       // Runtime.getRuntime().exec(currDir+"\\SimulANT+ 2.3.0\\SimulANT+\\SimulANT+.exe", null, new File(currDir+"\\SimulANT+ 2.3.0\\SimulANT+\\"));
 
         timer.start();
 
@@ -65,21 +63,17 @@ ActionListener taskPerformer = new ActionListener() {
         jScrollPane1 = new javax.swing.JScrollPane();
         DisplayResults = new javax.swing.JTextArea();
         Header = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         Heartrate = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         ID = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         DisplayResults.setColumns(20);
         DisplayResults.setRows(5);
-        DisplayResults.setText("\t1. Choose a sensor\n\t2. Start logging\n\t3. Turn on sensor\n\n         RESULTS WILL APPEAR HERE");
+        DisplayResults.setText("\t1. Press Logging button\n\n         RESULTS WILL APPEAR HERE");
         jScrollPane1.setViewportView(DisplayResults);
 
         Header.setText("Dr Sync");
-
-        jButton1.setText("jButton1");
 
         Heartrate.setText("Heart Rate");
         Heartrate.addActionListener(new java.awt.event.ActionListener() {
@@ -88,17 +82,15 @@ ActionListener taskPerformer = new ActionListener() {
             }
         });
 
-        jButton2.setText("jButton1");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
         ID.setText("Medical Record Number");
         ID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 IDActionPerformed(evt);
+            }
+        });
+        ID.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                IDKeyPressed(evt);
             }
         });
 
@@ -109,22 +101,19 @@ ActionListener taskPerformer = new ActionListener() {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addComponent(Heartrate)
-                        .addGap(26, 26, 26)
-                        .addComponent(jButton2)
-                        .addGap(31, 31, 31)
-                        .addComponent(jButton1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(Header, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(25, 25, 25)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(Header, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addGap(89, 89, 89)
+                            .addComponent(ID, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(89, 89, 89)
-                        .addComponent(ID, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(32, Short.MAX_VALUE))
+                        .addGap(118, 118, 118)
+                        .addComponent(Heartrate)))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -133,12 +122,9 @@ ActionListener taskPerformer = new ActionListener() {
                 .addComponent(Header)
                 .addGap(26, 26, 26)
                 .addComponent(ID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Heartrate)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                .addGap(37, 37, 37)
+                .addComponent(Heartrate)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(62, 62, 62))
         );
@@ -147,21 +133,18 @@ ActionListener taskPerformer = new ActionListener() {
     }// </editor-fold>//GEN-END:initComponents
 
     private void HeartrateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HeartrateActionPerformed
-
-        try {
+        //restart timer
+         try {
             timer.restart();
-            Header.setText("hi");
+            //create mysql connection
             //---------------------------------------------JDBC MySQL Setup-------------------------------------------------------------------------
             Class.forName("com.mysql.cj.jdbc.Driver");
             String url = "jdbc:mysql://database-1.cqwrgzkfrky6.us-west-2.rds.amazonaws.com/SyncData";
             String user = "admin";
             String password = "get-blame-lateral";
-            //---------------------------------------------PATIENT NAME INPUT-------------------------------------------------------------------------
+            //---------------------------------------------PATIENT ID INPUT-------------------------------------------------------------------------
             Scanner sc = new Scanner(System.in);
-            //System.out.println("Enter Patient ID: ");
             String patientID = ID.getText();
-            //System.out.println("Enter patient last name:");
-            //System.out.println("Enter patient first name:");
                         int avg;
                         do {
                             int[] heartArray = new int[10];//declare avg array
@@ -170,25 +153,22 @@ ActionListener taskPerformer = new ActionListener() {
                             while (fileScanner.hasNextInt()){
                                 heartArray[index++] = fileScanner.nextInt();
                             }
-                            //System.out.print(Arrays.toString(heartArray));
                             int total = 0;
                             for(int i=0; i<heartArray.length; i++){
                                 total = total + heartArray[i];
                             }
+                            //calculate average heartrate of array
                             avg = total / heartArray.length;
                         } while (avg == 0);
+                        
                         DisplayResults.setText("Average: " + avg); //print avg
                         Connection connection = DriverManager.getConnection(url, user, password);
                         String query = "insert into PatientVisits (patientID, heartrate) values (?,?)";
                         PreparedStatement createquery=connection.prepareStatement(query);
                         createquery.setString(1, ID.getText());
                         createquery.setString(2, Integer.toString(avg));
+                        Header.setText("Uploaded data");
                         createquery.executeUpdate();
-      
-                         Statement statement = connection.createStatement();
-                         statement.executeUpdate(query);
-                         statement.close();
-                         connection.close();
         }catch (ClassNotFoundException ex) {
             Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
         }catch (SQLException ex) {
@@ -196,18 +176,19 @@ ActionListener taskPerformer = new ActionListener() {
              Header.setText("Patient does not exist");
         }
         catch( java.io.FileNotFoundException e ) {
-                               // e.printStackTrace();
-                                //return null;
         }
     }//GEN-LAST:event_HeartrateActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        timer.restart();
-    }//GEN-LAST:event_jButton2ActionPerformed
 
     private void IDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IDActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_IDActionPerformed
+
+    private void IDKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_IDKeyPressed
+        if(ID.getText().equals("Medical Record Number"))
+        {
+            ID.setText("");
+        }
+    }//GEN-LAST:event_IDKeyPressed
 
     /**
      * @param args the command line arguments
@@ -256,8 +237,6 @@ ActionListener taskPerformer = new ActionListener() {
     private javax.swing.JLabel Header;
     private javax.swing.JButton Heartrate;
     private javax.swing.JTextField ID;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }
