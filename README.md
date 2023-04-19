@@ -5,8 +5,8 @@ Latest Version of Java
 Visual Studio 2013 (or the dll file requested at launch)  
 
 Instructions:  
-Extract Files  
-Launch DrSync.exe  
+1. Extract Files  
+2. Launch DrSync.exe  
 
 Limitations:  
 This contains only the heartrate functionality. However, this can be used as a base template for additional sensors such as heartrate, temperature, and blood pressure. The UI buttons for the extra sensors are already made along with the selection logic in the java program. You will need to download the specific C++ sensor file from the ANT+ SDK API libraries found at https://www.thisisant.com/developer/resources/downloads/#software_tab  
