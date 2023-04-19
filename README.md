@@ -3,7 +3,7 @@ Dr. Sync is HIPAA Compliant Java and C++ Application that receives real-time ext
 Prerequisites:  
 Latest Version of Java  
 Visual Studio 2013 (or the dll file requested at launch)  
-  
+
 Instructions:
 Extract Files
 Launch DrSync.exe
