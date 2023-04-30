@@ -51,6 +51,7 @@ ActionListener taskPerformer = new ActionListener() {
 
     }
 
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -144,6 +145,7 @@ ActionListener taskPerformer = new ActionListener() {
             String password = "get-blame-lateral";
             //---------------------------------------------PATIENT ID INPUT-------------------------------------------------------------------------
             Scanner sc = new Scanner(System.in);
+            String returned="";
             String patientID = ID.getText();
                         int avg;
                         do {
@@ -169,11 +171,34 @@ ActionListener taskPerformer = new ActionListener() {
                         createquery.setString(2, Integer.toString(avg));
                         Header.setText("Uploaded data");
                         createquery.executeUpdate();
+                        query = "SELECT * FROM PatientVisits where PatientID="+ID.getText()+" ORDER BY pkey DESC LIMIT 1";
+                        createquery=connection.prepareStatement(query);
+                        ResultSet returnlatest= createquery.executeQuery();
+                        while (returnlatest.next()){
+                            returned=returnlatest.getString("heartRate");
+                        }
+                        query = "SELECT * FROM PatientVisits where PatientID="+ID.getText()+" ORDER BY pkey DESC limit 5";
+                        createquery=connection.prepareStatement(query);
+                        ResultSet runningaverage= createquery.executeQuery();
+                        runningaverage.next();
+                        int runningavg=0;
+                        int divby=0;
+                        
+                        while(runningaverage.next()){
+                            runningavg+=runningaverage.getInt("heartRate");
+                            divby++;
+                        }
+                        if(divby!=0){
+                        runningavg=runningavg/divby;
+                        }
+                        
+                        DisplayResults.setText("Average: " + returned+"\n recent data averaged:"+runningavg); //print avg
         }catch (ClassNotFoundException ex) {
             Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
         }catch (SQLException ex) {
              Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
              Header.setText("Patient does not exist");
+             DisplayResults.setText("No reading; check patient ID"); //print avg
         }
         catch( java.io.FileNotFoundException e ) {
         }
