@@ -73,6 +73,11 @@ public class login extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         ID.setText("Practitioner Employee ID");
+        ID.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                IDMouseDragged(evt);
+            }
+        });
         ID.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 IDMouseClicked(evt);
@@ -90,6 +95,11 @@ public class login extends javax.swing.JFrame {
         });
 
         password.setText("Practitioner Password");
+        password.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                passwordMouseDragged(evt);
+            }
+        });
         password.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 passwordMouseClicked(evt);
@@ -228,7 +238,7 @@ public class login extends javax.swing.JFrame {
             Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_logInActionPerformed
-
+//handle making the fields clear themselves. They feel nicer to use like this
     private void IDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_IDMouseClicked
         if(ID.getText().equals("Practitioner Employee ID"))
         {
@@ -249,6 +259,20 @@ public class login extends javax.swing.JFrame {
             password.setText("");
         }
     }//GEN-LAST:event_passwordMouseClicked
+
+    private void IDMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_IDMouseDragged
+       if(ID.getText().equals("Practitioner Employee ID"))
+        {
+            ID.setText("");
+        }
+    }//GEN-LAST:event_IDMouseDragged
+
+    private void passwordMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_passwordMouseDragged
+         if(password.getText().equals("Practitioner Password"))
+        {
+            password.setText("");
+        }
+    }//GEN-LAST:event_passwordMouseDragged
 
     /**
      * @param args the command line arguments

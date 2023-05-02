@@ -6,7 +6,7 @@ Visual Studio 2013 (or the dll file requested at launch)
 
 Instructions:  
 1. Extract Files  
-2. Launch DrSync.exe  
+2. Launch DrSync.jar  
 3. Input Patient Information  
 
 Limitations:  
