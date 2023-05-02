@@ -166,7 +166,7 @@ public class login extends javax.swing.JFrame {
         String Username=ID.getText();
         String Password=password.getText();
         String generatedPassword = null;
-
+        
     try 
     {
       // Create MessageDigest instance for MD5
@@ -229,7 +229,7 @@ public class login extends javax.swing.JFrame {
                 }     
                 Notify.setText("successful Login");
                 Notify.setVisible(true);
-                new NewJFrame(ID.getText()).setVisible(true);
+                new monitorPage(ID.getText()).setVisible(true);
                 //ensure page and database connection closes
                 conn.close();
                 dispose();}} catch (SQLException ex) {
