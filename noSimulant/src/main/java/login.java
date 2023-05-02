@@ -166,7 +166,7 @@ public class login extends javax.swing.JFrame {
         String Username=ID.getText();
         String Password=password.getText();
         String generatedPassword = null;
-        
+
     try 
     {
       // Create MessageDigest instance for MD5
