@@ -229,7 +229,7 @@ public class login extends javax.swing.JFrame {
                 }     
                 Notify.setText("successful Login");
                 Notify.setVisible(true);
-                new NewJFrame(ID.getText()).setVisible(true);
+                new monitorPage(ID.getText()).setVisible(true);
                 //ensure page and database connection closes
                 conn.close();
                 dispose();}} catch (SQLException ex) {
