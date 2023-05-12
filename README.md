@@ -16,9 +16,9 @@ This contains only the heartrate functionality. However, this can be used as a b
 While the original use of this project was to send to a MySQL database, there is only a few lines of code that will need to be altered to make it work for your database of choice. The front end web portion of this project is not included in this repository as it is hosted on an application called Retool.
 
 Demo:  
-[![Final video of fixing issues in your code in VS Code]
-(https://img.youtube.com/vi/JLMbpiywVxQ/maxresdefault.jpg)]
-(https://www.youtube.com/watch?v=JLMbpiywVxQ)
+https://github.com/Ranchy101/DrSync/assets/42690717/71eb9535-a164-4e37-8527-e0b040c1260a
+
+
 
 Creators:   
 Amy Raval  
