@@ -16,7 +16,9 @@ This contains only the heartrate functionality. However, this can be used as a b
 While the original use of this project was to send to a MySQL database, there is only a few lines of code that will need to be altered to make it work for your database of choice. The front end web portion of this project is not included in this repository as it is hosted on an application called Retool.
 
 Demo:  
-[![Watch the video](https://img.youtube.com/vi/nTQUwghvy5Q/default.jpg)](https://youtu.be/nTQUwghvy5Q)
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=nTQUwghvy5Q" target="_blank">
+ <img src="http://img.youtube.com/vi/nTQUwghvy5Q/mqdefault.jpg" alt="Watch the video" width="240" height="180" border="10" />
+</a>
 
 Creators:   
 Amy Raval  
